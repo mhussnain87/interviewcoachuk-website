@@ -687,6 +687,71 @@
 
   .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
 
+
+  /* TOPIC GRID */
+  .topics { background: var(--navy); }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .topic-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.8rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .topic-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .topic-icon {
+    width: 44px; height: 44px;
+    background: rgba(201,146,58,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .topic-title {
+    font-weight: 600; font-size: 1.05rem; margin-bottom: 0.4rem;
+    color: var(--white);
+  }
+  .topic-blurb {
+    font-size: 0.85rem; color: var(--text-muted);
+    margin-bottom: 1.2rem; line-height: 1.5;
+  }
+  .topic-links { list-style: none; padding: 0; margin: 0; }
+  .topic-links li { border-top: 1px solid rgba(255,255,255,0.06); }
+  .topic-links li:first-child { border-top: none; }
+  .topic-links a {
+    display: block;
+    padding: 0.6rem 0;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+  .topic-links a:hover { color: var(--gold-light); padding-left: 0.3rem; }
+  .topic-links a::before {
+    content: '\2192  ';
+    color: var(--gold);
+    margin-right: 0.3rem;
+  }
+
+  .blog-view-all {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .blog-view-all a {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(201,146,58,0.3);
+    padding-bottom: 0.2rem;
+  }
+  .blog-view-all a:hover { border-color: var(--gold); }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.2rem; }
@@ -709,8 +774,9 @@
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#topics">Guides</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#blog">Blog</a></li>
+    <li><a href="/blog/">Blog</a></li>
     <li><a href="https://apps.apple.com/gb/app/interview-coach-uk/id6754808754" class="nav-cta">Download Free</a></li>
   </ul>
 </nav>
@@ -973,31 +1039,123 @@
   </div>
 </section>
 
-<!-- BLOG -->
+<!-- BROWSE BY TOPIC -->
+<section class="topics" id="topics">
+  <div class="container">
+    <div class="section-tag">Browse Guides</div>
+    <h2>Find your interview guide</h2>
+    <p class="section-lead">Free in-depth guides for every UK sector, role and interview type. Written for the way UK panels actually score.</p>
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="topic-icon">🏥</div>
+        <div class="topic-title">NHS Interviews</div>
+        <div class="topic-blurb">Band-by-band guides covering values, governance, leadership and clinical scenarios.</div>
+        <ul class="topic-links">
+          <li><a href="/blog/nhs-interview-questions-uk/">NHS Interview Questions UK</a></li>
+          <li><a href="/blog/nhs-band-5-interview-questions/">NHS Band 5 Interview Questions</a></li>
+          <li><a href="/blog/nhs-band-6-interview-questions/">NHS Band 6 Interview Questions</a></li>
+          <li><a href="/blog/nhs-band-7-interview-questions/">NHS Band 7 Interview Questions</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">🏛️</div>
+        <div class="topic-title">Civil Service</div>
+        <div class="topic-blurb">Success Profiles, the 9 behaviours, strengths questions and panel scoring decoded.</div>
+        <ul class="topic-links">
+          <li><a href="/blog/civil-service-interview-questions/">Civil Service Interview Questions</a></li>
+          <li><a href="/blog/civil-service-success-profiles-interview/">Success Profiles Explained</a></li>
+          <li><a href="/blog/civil-service-behaviours-interview-questions/">All 9 Behaviours Decoded</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">🎓</div>
+        <div class="topic-title">Education</div>
+        <div class="topic-blurb">Teaching, TA and school support roles — including safeguarding essentials.</div>
+        <ul class="topic-links">
+          <li><a href="/blog/teaching-assistant-interview-questions-uk/">Teaching Assistant Interview Questions</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">⭐</div>
+        <div class="topic-title">Universal Questions</div>
+        <div class="topic-blurb">The questions every UK interview asks — and how to answer them properly.</div>
+        <ul class="topic-links">
+          <li><a href="/blog/tell-me-about-yourself-interview-answer-uk/">Tell Me About Yourself</a></li>
+          <li><a href="/blog/strengths-weaknesses-interview-answers-uk/">Strengths and Weaknesses</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">🎯</div>
+        <div class="topic-title">Interview Methods</div>
+        <div class="topic-blurb">The frameworks UK employers use — STAR, competency, behavioural.</div>
+        <ul class="topic-links">
+          <li><a href="/blog/star-method-interview-technique/">The STAR Method</a></li>
+          <li><a href="/blog/competency-based-interview-questions/">Competency-Based Interviews</a></li>
+          <li><a href="/blog/behavioural-interview-questions-uk/">Behavioural Interview Questions</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <div class="topic-icon">📚</div>
+        <div class="topic-title">All Guides</div>
+        <div class="topic-blurb">Browse every interview guide in one place — new posts added every week.</div>
+        <ul class="topic-links">
+          <li><a href="/blog/">View all interview guides &rarr;</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG (dynamic — auto-loads latest 6 from posts.json) -->
 <section class="blog" id="blog">
   <div class="container">
     <div class="section-tag">Interview Tips</div>
     <h2>Latest from the blog</h2>
     <p class="section-lead">Practical guides written for UK job seekers.</p>
-    <div class="blog-grid">
-      <a href="/blog/nhs-interview-questions-uk/" class="blog-card">
-        <div class="blog-tag">NHS</div>
-        <div class="blog-title">NHS Interview Questions UK: The Complete Guide</div>
-        <div class="blog-excerpt">The most common NHS interview questions, with STAR method example answers and tips on what hiring managers are really looking for.</div>
-      </a>
-      <a href="/blog/competency-based-interview-questions/" class="blog-card">
-        <div class="blog-tag">Competency</div>
-        <div class="blog-title">Competency Based Interview Questions: How to Prepare</div>
-        <div class="blog-excerpt">Everything you need to know about competency-based interviews — what they are, how to structure your answers, and the questions you'll likely face.</div>
-      </a>
-      <a href="/blog/star-method-interview-technique/" class="blog-card">
-        <div class="blog-tag">STAR Method</div>
-        <div class="blog-title">The STAR Method Interview Technique Explained</div>
-        <div class="blog-excerpt">A practical breakdown of the STAR method — Situation, Task, Action, Result — with real examples and common mistakes to avoid.</div>
-      </a>
+    <div class="blog-grid" id="latest-posts">
+      <!-- Posts injected by JavaScript below -->
+    </div>
+    <div class="blog-view-all">
+      <a href="/blog/">View all interview guides &rarr;</a>
     </div>
   </div>
 </section>
+
+<script>
+  // Auto-load latest blog posts from posts.json
+  (function() {
+    const tagMap = {
+      'nhs': 'NHS', 'civil-service': 'Civil Service',
+      'teaching': 'Education', 'star-method': 'STAR Method',
+      'competency': 'Competency', 'behavioural': 'Behavioural',
+      'tell-me': 'Universal', 'strengths-weaknesses': 'Universal'
+    };
+    function tagFor(slug) {
+      for (const k in tagMap) { if (slug.includes(k)) return tagMap[k]; }
+      return 'Interview Tips';
+    }
+    function parseDate(s) {
+      // "17 April 2026" -> Date
+      const parts = s.split(' ');
+      const months = {January:0,February:1,March:2,April:3,May:4,June:5,July:6,August:7,September:8,October:9,November:10,December:11};
+      return new Date(parseInt(parts[2]), months[parts[1]], parseInt(parts[0]));
+    }
+    fetch('/blog/posts.json')
+      .then(r => r.json())
+      .then(posts => {
+        posts.sort((a,b) => parseDate(b.date) - parseDate(a.date));
+        const latest = posts.slice(0, 6);
+        const html = latest.map(p => `
+          <a href="/blog/${p.slug}/" class="blog-card">
+            <div class="blog-tag">${tagFor(p.slug)}</div>
+            <div class="blog-title">${p.title}</div>
+            <div class="blog-excerpt">${p.excerpt}</div>
+          </a>`).join('');
+        document.getElementById('latest-posts').innerHTML = html;
+      })
+      .catch(err => console.error('Could not load posts:', err));
+  })();
+</script>
 
 <!-- CTA STRIP -->
 <section class="cta-strip">
@@ -1018,7 +1176,7 @@
     <ul class="footer-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#blog">Blog</a></li>
+      <li><a href="/blog/">Blog</a></li>
       <li><a href="https://interviewcoachuk.com/privacy-policy/">Privacy Policy</a></li>
       <li><a href="https://interviewcoachuk.com/terms-of-use/">Terms of Use</a></li>
     </ul>
