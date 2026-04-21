@@ -1,0 +1,7 @@
+# robots.txt for interviewcoachuk.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://interviewcoachuk.com/sitemap.xml
