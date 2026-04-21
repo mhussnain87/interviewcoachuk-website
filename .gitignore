@@ -1,3 +1,4 @@
 
 # Local SEO backup files
 *.backup-*
+.blog-seo-backup/
