@@ -2,3 +2,7 @@
 # Local SEO backup files
 *.backup-*
 .blog-seo-backup/
+
+# Local backup files (not for commit)
+.backups/
+*.bak
