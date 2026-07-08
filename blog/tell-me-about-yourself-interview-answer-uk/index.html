@@ -277,6 +277,34 @@
     nav .nav-links { display: none; }
   }
 </style>
+
+<style>
+/* ═══ App-identity override (2026 redesign) — appended, does not touch article layout rules ═══ */
+:root{--navy:#0D1B2A;--navy-mid:#13293D;--gold:#17A2B8;--gold-light:#7FD8E5;--off-white:#F7F9FC;--text-dark:#1A2733;--text-muted:#5A6B7B;--border:#E3EAF2}
+body{font-family:'Inter',-apple-system,sans-serif}
+.nav-logo,.footer-logo{font-family:'Inter',sans-serif;font-weight:700;color:#fff;display:flex;align-items:center;gap:9px}
+.nav-logo::before,.footer-logo::before{content:'';width:28px;height:28px;border-radius:6px;background:url('/assets/app-icon.png') center/cover;display:inline-block}
+.nav-cta{background:var(--gold)!important;color:#fff!important;border-radius:10px;padding:8px 16px!important}
+h1,h2,h3,.hero-bar .tag{font-family:'Inter',sans-serif}
+h1{font-weight:800}
+.icuk-cta-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-radius:16px;border:1px solid rgba(23,162,184,.3)}
+.icuk-cta-banner a{background:var(--gold);color:#fff;border-radius:10px;font-weight:600}
+.icuk-cta-banner a:hover{background:#1391a5}
+/* Quick answer box */
+.quick-answer{background:#E3F6F9;border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0 28px;font-size:1.02rem}
+.quick-answer b{color:var(--navy)}
+/* Feature B teaser inside CTA banners */
+.cta-featureb{display:block;margin-top:10px;color:var(--gold-light);font-size:.9rem;font-weight:500}
+/* Sticky mobile CTA */
+.sticky-cta{display:none}
+@media(max-width:760px){
+.sticky-cta{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--navy);padding:10px 16px;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -6px 18px rgba(0,0,0,.18)}
+.sticky-cta span{color:#fff;font-size:.85rem;font-weight:600}
+.sticky-cta a{background:var(--gold);color:#fff;text-decoration:none;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:10px;white-space:nowrap}
+body{padding-bottom:64px}
+}
+</style>
+
 </head>
 <body>
 
@@ -299,6 +327,7 @@
 
 <div class="layout">
   <article>
+<div class="quick-answer"><b>Quick answer:</b> How to answer 'tell me about yourself' in a UK interview — Present-Past-Future structure, example answers by sector, and mistakes to avoid. 2026 guide.</div>
     <p>"Tell me about yourself" is almost always the first question in a UK job interview — and it's the one most candidates answer badly. Too long, too short, too personal, or just a CV readout. This guide shows you exactly how to answer it in a way that sets the tone for a winning interview.</p>
 
 <!-- icuk-cta -->
@@ -308,6 +337,7 @@
     <a href="https://apps.apple.com/gb/app/interview-coach-uk/id6754808754">Download on App Store</a>
     <a href="https://play.google.com/store/apps/details?id=com.interviewcoachuk">Get it on Google Play</a>
   </div>
+<span class="cta-featureb">Preparing for a specific job? Paste the advert into the app for 12 questions tailored to that exact role.</span>
 </div>
 <!-- /icuk-cta -->
 
@@ -384,6 +414,7 @@
     <a href="https://apps.apple.com/gb/app/interview-coach-uk/id6754808754">Download on App Store</a>
     <a href="https://play.google.com/store/apps/details?id=com.interviewcoachuk">Get it on Google Play</a>
   </div>
+<span class="cta-featureb">Preparing for a specific job? Paste the advert into the app for 12 questions tailored to that exact role.</span>
 </div>
 <!-- /icuk-cta -->
 
