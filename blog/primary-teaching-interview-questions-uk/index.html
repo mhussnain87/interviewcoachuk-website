@@ -268,6 +268,12 @@
     aside { position: static; }
     nav .nav-links { display: none; }
   }
+
+  .cta-qr { display:flex; align-items:center; gap:12px; margin-top:14px;
+            padding-top:12px; border-top:1px solid rgba(255,255,255,.15); }
+  .cta-qr img { width:84px; height:84px; background:#fff; border-radius:8px; padding:5px; }
+  .cta-qr span { color:#b9c6d8; font-size:.85rem; line-height:1.4; }
+  @media (max-width: 820px) { .cta-qr { display:none; } }
 </style>
 
 <style>
@@ -333,6 +339,8 @@ body{padding-bottom:64px}
     <a href="https://play.google.com/store/apps/details?id=com.interviewcoachuk">Get it on Google Play</a>
   </div>
 <span class="cta-featureb">Preparing for a specific job? Paste the advert into the app for 12 questions tailored to that exact role.</span>
+  <div class="cta-qr"><img src="/assets/qr-get-app.svg" alt="QR code to download Interview Coach UK" loading="lazy"><span>On desktop? Point your phone camera here - it takes you straight to the right store.</span></div>
+
 </div>
 <!-- /icuk-cta -->
 
@@ -457,6 +465,8 @@ body{padding-bottom:64px}
     <a href="https://play.google.com/store/apps/details?id=com.interviewcoachuk">Get it on Google Play</a>
   </div>
 <span class="cta-featureb">Preparing for a specific job? Paste the advert into the app for 12 questions tailored to that exact role.</span>
+  <div class="cta-qr"><img src="/assets/qr-get-app.svg" alt="QR code to download Interview Coach UK" loading="lazy"><span>On desktop? Point your phone camera here - it takes you straight to the right store.</span></div>
+
 </div>
 <!-- /icuk-cta -->
 
