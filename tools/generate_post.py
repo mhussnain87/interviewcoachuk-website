@@ -242,7 +242,14 @@ def main():
         open(BLOG_INDEX, "w", encoding="utf-8").write(bi)
         print("UPDATED blog/index.html")
 
-    print(f"""
+        # refresh search index so the new guide is searchable
+    try:
+        import subprocess
+        subprocess.run(["python3", os.path.join(REPO, "tools", "build_search_index.py")], check=False)
+    except Exception:
+        pass
+
+print(f"""
 REVIEW CHECKLIST
   1. open blog/{a.slug}/index.html   (visual check in browser)
   2. Skim content for factual errors (salaries, frameworks, band numbers)

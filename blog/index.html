@@ -78,6 +78,15 @@ body{padding-bottom:64px}
   <p>Practical advice for UK job seekers — written by Interview Coach UK.</p>
 </div>
 <div class="container">
+  
+  <div style="max-width:560px;margin:0 auto 2rem;">
+    <input id="guide-search" type="search" placeholder="Search guides - e.g. STAR method, NHS band 6, police..."
+      style="width:100%;padding:14px 18px;font-size:1rem;border:2px solid #d7dee8;border-radius:12px;outline:none;"
+      autocomplete="off" aria-label="Search interview guides">
+    <p id="guide-search-empty" style="display:none;color:#5a6b80;text-align:center;margin-top:1rem;">
+      No guides match that - try a broader term like "NHS" or "STAR".</p>
+  </div>
+
   <div class="blog-grid">
     <a href="/blog/retail-manager-interview-questions-uk/" class="blog-card">
       <div class="blog-tag">Interview Tips</div>
@@ -243,5 +252,36 @@ body{padding-bottom:64px}
   </ul>
   <div class="footer-copy">© 2026 Interview Coach UK. All rights reserved.</div>
 </footer>
+
+<script>
+(function(){
+  var input = document.getElementById('guide-search');
+  if (!input) return;
+  var idx = null, cards = null, empty = document.getElementById('guide-search-empty');
+  fetch('/assets/search-index.json').then(function(r){return r.json();})
+    .then(function(d){ idx = d; }).catch(function(){ idx = []; });
+  function norm(t){ return (t||'').toLowerCase(); }
+  input.addEventListener('input', function(){
+    if (!cards) cards = Array.prototype.slice.call(document.querySelectorAll('.blog-card'));
+    var q = norm(input.value).trim();
+    if (!q){ cards.forEach(function(c){ c.style.display=''; }); empty.style.display='none'; return; }
+    var words = q.split(/\s+/);
+    var matchUrls = {};
+    (idx||[]).forEach(function(it){
+      var hay = norm(it.t + ' ' + it.d + ' ' + it.h);
+      if (words.every(function(w){ return hay.indexOf(w) !== -1; })) matchUrls[it.u] = 1;
+    });
+    var shown = 0;
+    cards.forEach(function(c){
+      var href = c.getAttribute('href');
+      var cardText = norm(c.textContent);
+      var ok = matchUrls[href] || words.every(function(w){ return cardText.indexOf(w) !== -1; });
+      c.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    empty.style.display = shown ? 'none' : 'block';
+  });
+})();
+</script>
 </body>
 </html>
