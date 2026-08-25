@@ -20,7 +20,7 @@ def slugify(t):
 
 def process(path):
     h = open(path, encoding="utf-8").read()
-    if "icuk-toc" in h:
+    if '<details class="icuk-toc"' in h:
         return "skip (has TOC)"
     art = re.search(r"<article>(.*?)</article>", h, re.S)
     if not art:
@@ -51,7 +51,8 @@ def process(path):
     else:
         new_body = toc + new_body
     h = h.replace(art.group(0), "<article>" + new_body + "</article>", 1)
-    h = h.replace("</style>", TOC_CSS + "</style>", 1)
+    if ".icuk-toc" not in h:
+        h = h.replace("</style>", TOC_CSS + "</style>", 1)
     open(path, "w", encoding="utf-8").write(h)
     return f"OK ({len(entries)} sections)"
 
