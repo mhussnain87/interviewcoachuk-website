@@ -246,6 +246,8 @@ def main():
     try:
         import subprocess
         subprocess.run(["python3", os.path.join(REPO, "tools", "build_search_index.py")], check=False)
+        subprocess.run(["python3", os.path.join(REPO, "tools", "add_toc.py")], check=False)
+        subprocess.run(["python3", os.path.join(REPO, "tools", "group_guides_page.py")], check=False)
     except Exception:
         pass
 
