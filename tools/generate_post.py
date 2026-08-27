@@ -251,7 +251,7 @@ def main():
     except Exception:
         pass
 
-print(f"""
+    print(f"""
 REVIEW CHECKLIST
   1. open blog/{a.slug}/index.html   (visual check in browser)
   2. Skim content for factual errors (salaries, frameworks, band numbers)
