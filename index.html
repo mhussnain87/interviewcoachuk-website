@@ -138,6 +138,15 @@ section{padding:52px 0}
     .store-btn { text-align:center; }
     .sector-strip a { font-size:.88rem; padding:9px 14px; }
   }
+
+  .prep-guide-card { display:flex; align-items:center; gap:14px; margin-top:22px; max-width:560px;
+    background:rgba(79,163,184,.12); border:1px solid rgba(79,163,184,.45); border-radius:14px;
+    padding:14px 18px; text-decoration:none; color:#dfe9f2; transition:background .15s; }
+  .prep-guide-card:hover { background:rgba(79,163,184,.22); }
+  .prep-guide-card .pgc-icon { font-size:1.6rem; }
+  .prep-guide-card .pgc-text { font-size:.95rem; line-height:1.45; }
+  .prep-guide-card .pgc-text strong { color:#fff; }
+  .prep-guide-card .pgc-arrow { margin-left:auto; font-size:1.4rem; color:#4fa3b8; }
 </style>
 </head>
 <body id="top">
@@ -167,22 +176,11 @@ section{padding:52px 0}
 <div class="cta-qr"><img src="/assets/qr-get-app.svg" alt="QR code to download Interview Coach UK" loading="lazy"><span>On desktop? Point your phone camera here - it goes straight to the right store.</span></div>
 
       <div class="trial-note">Free to download · Premium free for 3 days</p>
-<p class="trial-note" style="margin-top:6px">New to interviews? <a href="/blog/how-to-prepare-for-an-interview-uk/" style="color:#4fa3b8">Start with our complete preparation guide →</a></div>
-      <div class="stats">
-        <div class="stat"><b>315+</b><span>Questions</span></div>
-        <div class="stat"><b>9</b><span>UK sectors</span></div>
-        <div class="stat"><b>3 days</b><span>Free trial</span></div>
-      </div>
-    </div>
-    <div class="phone"><img src="assets/screenshots/learn.png" alt="Interview Coach UK Learn screen showing UK competency questions"></div>
-  </div>
-</header>
-
-<section id="features">
-  <div class="container">
-    <div class="section-tag">Features</div>
-    <h2>Everything you need to prepare</h2>
-    <p class="lead">Learn from expert answers, practise under pressure, and get coached by AI — all in one app.</p>
+<a href="/blog/how-to-prepare-for-an-interview-uk/" class="prep-guide-card">
+  <span class="pgc-icon">📘</span>
+  <span class="pgc-text"><strong>New to interviews?</strong><br>Read our complete UK preparation guide — research, STAR answers, practice and the day itself.</span>
+  <span class="pgc-arrow">→</span>
+</a>
     <div class="features-grid">
       <div class="feature-card"><div class="feature-icon">📚</div><h3>315+ real UK questions</h3><p>Universal competencies plus sector packs for NHS, Civil Service, Teaching, Tech, Finance, Retail, Engineering and Marketing.</p></div>
       <div class="feature-card"><div class="feature-icon">🎧</div><h3>Model answers you can hear</h3><p>Expert STAR answers for every question, with natural voice playback that starts in seconds.</p></div>
