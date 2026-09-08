@@ -16,11 +16,50 @@
 <meta name="robots" content="noindex">
 <script>
 (function () {
+  var PT = "128149894";
+
+  var params = new URLSearchParams(window.location.search);
+  var src = (params.get("utm_source") || "").toLowerCase().replace(/[^a-z0-9_]/g, "");
+  var med = (params.get("utm_medium") || "").toLowerCase().replace(/[^a-z0-9_]/g, "");
+
+  var MAP = {
+    tiktok:   "tiktok_bio",
+    qr:       "qr_print",
+    guide:    "guide_cta",
+    college:  "college_qr",
+    dwp:      "dwp",
+    linkedin: "linkedin",
+    website:  "website"
+  };
+  var campaign = MAP[src] || (src ? src.slice(0, 30) : "direct");
+
+  var iosUrl = "https://apps.apple.com/app/id6754808754?pt=" + encodeURIComponent(PT)
+             + "&ct=" + encodeURIComponent(campaign) + "&mt=8";
+
+  var ref = "utm_source=" + (src || "direct")
+          + "&utm_medium=" + (med || "none")
+          + "&utm_campaign=" + campaign;
+  var androidUrl = "https://play.google.com/store/apps/details?id=com.interviewcoachuk&referrer="
+                 + encodeURIComponent(ref);
+
+  window.__icuk = { ios: iosUrl, android: androidUrl, campaign: campaign };
+
   var ua = navigator.userAgent || "";
-  var ios = "https://apps.apple.com/app/id6754808754";
-  var android = "https://play.google.com/store/apps/details?id=com.interviewcoachuk";
-  if (/android/i.test(ua)) { window.location.replace(android); }
-  else if (/iPad|iPhone|iPod/.test(ua)) { window.location.replace(ios); }
+  var isAndroid = /android/i.test(ua);
+  var isIOS = /iPad|iPhone|iPod/.test(ua);
+  var target = isAndroid ? androidUrl : (isIOS ? iosUrl : null);
+
+  if (target) {
+    var went = false;
+    var go = function () { if (!went) { went = true; window.location.replace(target); } };
+    gtag('event', 'get_redirect', {
+      campaign_token: campaign,
+      traffic_source: src || 'direct',
+      store: isAndroid ? 'play' : 'appstore',
+      event_callback: go
+    });
+    setTimeout(go, 800);
+  }
 })();
 </script>
 <style>
@@ -36,8 +75,18 @@
   <h1>Get Interview Coach UK</h1>
   <p>315 UK interview questions with AI feedback. Free to download.</p>
   <div>
-    <a class="btn" href="https://apps.apple.com/app/id6754808754">Download on the App&nbsp;Store</a>
-    <a class="btn" href="https://play.google.com/store/apps/details?id=com.interviewcoachuk">Get it on Google&nbsp;Play</a>
+    <a class="btn" id="ios-btn" href="https://apps.apple.com/app/id6754808754">Download on the App&nbsp;Store</a>
+    <a class="btn" id="android-btn" href="https://play.google.com/store/apps/details?id=com.interviewcoachuk">Get it on Google&nbsp;Play</a>
   </div>
+<script>
+(function () {
+  var d = window.__icuk;
+  if (!d) return;
+  var a = document.getElementById('ios-btn');
+  var b = document.getElementById('android-btn');
+  if (a) a.href = d.ios;
+  if (b) b.href = d.android;
+})();
+</script>
 </body>
 </html>
