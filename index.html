@@ -37,7 +37,7 @@
 ]}
 </script>
 <style>
-:root{color-scheme:light;--navy:#0D1B2A;--teal:#17A2B8;--bg:#F7F9FC;--card:#FFFFFF;--text:#1A2733;--muted:#5A6B7B;--line:#E3EAF2;--teal-soft:#E3F6F9}
+:root{color-scheme:light;--navy:#0D1B2A;--teal:#17A2B8;--teal-deep:#0B6E7F;--bg:#F7F9FC;--card:#FFFFFF;--text:#1A2733;--muted:#5A6B7B;--line:#E3EAF2;--teal-soft:#E3F6F9}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
@@ -51,7 +51,7 @@ nav{background:var(--navy);position:sticky;top:0;z-index:50}
 .nav-links{display:flex;gap:22px;align-items:center}
 .nav-links a{color:#C7D3DF;text-decoration:none;font-size:.92rem;font-weight:500}
 .nav-links a:hover{color:#fff}
-.nav-cta{background:var(--teal);color:#fff!important;padding:9px 18px;border-radius:10px;font-weight:600}
+.nav-cta{background:var(--teal-deep);color:#fff!important;padding:9px 18px;border-radius:10px;font-weight:600}
 /* HERO */
 .hero{background:linear-gradient(180deg,var(--navy) 0%,#13293D 100%);color:#fff;padding:70px 0 90px}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
@@ -70,7 +70,7 @@ nav{background:var(--navy);position:sticky;top:0;z-index:50}
 .phone img{width:100%;display:block}
 /* SECTIONS */
 section{padding:76px 0}
-.section-tag{color:var(--teal);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.section-tag{color:var(--teal-deep);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
 h2{font-size:2rem;font-weight:800;margin-bottom:14px;color:var(--navy)}
 .lead{color:var(--muted);max-width:640px;margin-bottom:40px}
 /* FLAGSHIP */
@@ -91,16 +91,16 @@ h2{font-size:2rem;font-weight:800;margin-bottom:14px;color:var(--navy)}
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
 .price-card{background:var(--bg);border:1.5px solid var(--line);border-radius:18px;padding:30px;display:flex;flex-direction:column}
 .price-card.featured{border-color:var(--teal);position:relative;background:var(--card);box-shadow:0 12px 32px rgba(23,162,184,.12)}
-.badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:5px 14px;border-radius:20px}
+.badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal-deep);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:5px 14px;border-radius:20px}
 .price-card h3{font-size:1rem;font-weight:700;color:var(--navy)}
 .price{font-size:2.2rem;font-weight:800;color:var(--navy);margin:10px 0 2px}
 .price small{font-size:.9rem;color:var(--muted);font-weight:500}
-.trial-line{color:var(--teal);font-weight:700;font-size:.88rem;margin-bottom:14px;min-height:1.3em}
+.trial-line{color:var(--teal-deep);font-weight:700;font-size:.88rem;margin-bottom:14px;min-height:1.3em}
 .price-card ul{list-style:none;margin:12px 0 22px;flex:1}
 .price-card li{padding-left:24px;position:relative;font-size:.9rem;color:var(--muted);margin-bottom:9px}
 .price-card li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:700}
 .price-cta{display:block;text-align:center;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;padding:12px;border-radius:12px;font-size:.92rem}
-.price-card.featured .price-cta{background:var(--teal)}
+.price-card.featured .price-cta{background:var(--teal-deep)}
 /* FAQ */
 details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;padding:18px 22px}
 summary{font-weight:600;cursor:pointer;color:var(--navy)}
@@ -173,6 +173,7 @@ section{padding:52px 0}
     </div>
   </div>
 </nav>
+<main>
 
 <header class="hero">
   <div class="container hero-grid">
@@ -344,6 +345,7 @@ section{padding:52px 0}
   </div>
 </section>
 
+</main>
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand"><img src="assets/app-icon.png" alt=""><span>© 2026 Interview Coach UK</span></div>
