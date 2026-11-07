@@ -68,7 +68,9 @@ nav{background:var(--navy);position:sticky;top:0;z-index:50}
 .stat b{display:block;font-size:1.7rem;font-weight:800;color:var(--teal)}
 .stat span{color:#8FA1B3;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
 .phone{width:270px;border-radius:38px;border:10px solid #223449;box-shadow:0 30px 60px rgba(0,0,0,.45);overflow:hidden;margin:0 auto}
-.phone img{width:100%;display:block}
+.phone img{width:100%;height:auto;display:block}
+.phone-pair{display:flex;gap:18px;justify-content:center;align-items:flex-start}
+.phone-pair .phone{width:210px;margin:0}
 /* SECTIONS */
 section{padding:76px 0}
 .section-tag{color:var(--teal-deep);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
@@ -133,6 +135,7 @@ footer a:hover{color:#fff}
 .stats{gap:22px;flex-wrap:wrap}
 section{padding:52px 0}
 .phone{width:230px}
+.phone-pair .phone{width:46%;max-width:200px;border-width:7px;border-radius:28px}
 }
 
   .cta-qr { display:flex; align-items:center; gap:12px; margin-top:14px;
@@ -204,7 +207,7 @@ section{padding:52px 0}
         <div class="stat"><b>£9.99</b><span>30-day pass</span></div>
       </div>
     </div>
-    <div class="phone"><img src="/assets/screenshots/learn.png" alt="Interview Coach UK app - Learn tab with UK competency questions"></div>
+    <div class="phone"><img src="/assets/screenshots/today.webp" width="600" height="1304" fetchpriority="high" alt="Interview Coach UK Today screen: an NHS Band 6 prep plan counting down 5 days to the interview, with today's three short tasks"></div>
   </div>
 </header>
 
@@ -226,7 +229,7 @@ section{padding:52px 0}
 
 <section class="flagship" id="job-packs">
   <div class="container flagship-grid">
-    <div class="phone"><img src="assets/screenshots/my-interview.png" alt="Job-specific interview pack screen"></div>
+    <div class="phone"><img src="/assets/screenshots/interview-pack.webp" width="600" height="1304" loading="lazy" alt="Interview pack for a Senior Staff Nurse Band 6 advert, listing what the panel will probe hardest with evidence quoted from the advert, and the first likely questions"></div>
     <div>
       <div class="section-tag">New — Job-Specific Packs</div>
       <h2>Preparing for a specific job? Paste the advert.</h2>
@@ -254,13 +257,13 @@ section{padding:52px 0}
         <li><b>Dictate by voice</b> — answer out loud, exactly as you would in the room</li>
       </ul>
     </div>
-    <div class="phone"><img src="assets/screenshots/coach.png" alt="AI Interview Coach screen with question and answer fields"></div>
+    <div class="phone"><img src="/assets/screenshots/feedback.webp" width="600" height="1304" loading="lazy" alt="AI feedback scorecard for a patient safety answer, rating Situation, Task, Action and Result, with the one fix that matters most"></div>
   </div>
 </section>
 
 <section class="flagship" id="mock-interviews">
   <div class="container flagship-grid">
-    <div class="phone"><img src="assets/screenshots/practice.png" alt="Mock interview setup screen with sector and competency filters"></div>
+    <div class="phone-pair"><div class="phone"><img src="/assets/screenshots/practise.webp" width="600" height="1304" loading="lazy" alt="Practise screen with a mock interview button, sector and competency filters, and NHS questions to answer"></div><div class="phone"><img src="/assets/screenshots/mock-interview.webp" width="600" height="1304" loading="lazy" alt="Mock interview in progress: question 1 of 3 with a three-minute timer and a tap-to-answer microphone"></div></div>
     <div>
       <div class="section-tag">Mock Interviews</div>
       <h2>Practise under real pressure — safely</h2>
@@ -298,6 +301,7 @@ section{padding:52px 0}
         <ul><li>Everything in the Interview Pass</li><li>Pay a week at a time</li><li>Cancel any time in your App Store or Google Play subscription settings</li></ul>
         <a class="price-cta" href="https://apps.apple.com/gb/app/id6754808754?pt=128149894&ct=website_home&mt=8">Get the app</a>
       </div>
+      <div class="pricing-phone"><div class="phone"><img src="/assets/screenshots/paywall.webp" width="600" height="1304" loading="lazy" alt="The in-app plan screen: Interview Pass at £9.99 for 30 days with nothing to cancel, or Weekly at £2.99"></div></div>
     </div>
   </div>
 </section>
