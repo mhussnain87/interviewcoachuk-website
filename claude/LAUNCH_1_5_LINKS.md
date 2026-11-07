@@ -257,3 +257,11 @@ Every page with the nav button: label "Try free" to "Get the app"; href `/#prici
 ## Nav "Get the app" (follow-up item 1)
 
 Every nav "Get the app" button now links to `/get/?ct=<page>-nav` (was a direct App Store link with `ct=nav-tryfree`). `/get/` sends iPhone visitors to the App Store with `ct=<page>-nav` and Android visitors to Google Play with `utm_source=icuk-web&utm_medium=<page>&utm_campaign=nav` (also inside `referrer=`). Desktop visitors see both buttons with the same tags. Page codes are the same as the store buttons above, plus `home`, `blog` (blog index), `privacy` and `terms`.
+
+## Practice lines, pricing and sidebar App Store button via /get/ (follow-up item 6)
+
+These App Store links now go to `/get/?ct=<tag>` with their existing tag, so Android visitors reach Google Play and iPhone visitors the App Store:
+
+- In-guide practice lines (9): `b5-q5`, `b5-q10`, `b5-q15`, `b6-q5`, `b6-q10`, `b6-q15`, `b7-q5`, `b7-q10`, `b7-q15`. On Play: `utm_medium=b5|b6|b7 utm_campaign=q5|q10|q15`.
+- Homepage pricing buttons (2): `home-pricing-pass`, `home-pricing-weekly`. On Play: `utm_medium=home-pricing utm_campaign=pass|weekly` (/get/ splits at the last hyphen).
+- Guide sidebar App Store button (30): `<page>-side`. On Play: `utm_medium=<page> utm_campaign=side`. The sidebar Google Play button next to it is unchanged (direct Play link, same tags).
