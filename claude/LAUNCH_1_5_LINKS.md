@@ -253,3 +253,7 @@ Every page with the nav button: label "Try free" to "Get the app"; href `/#prici
 | blog/nhs-band-7-interview-questions/index.html | 418 | ct=b7-q5 |
 | blog/nhs-band-7-interview-questions/index.html | 445 | ct=b7-q10 |
 | blog/nhs-band-7-interview-questions/index.html | 472 | ct=b7-q15 |
+
+## Nav "Get the app" (follow-up item 1)
+
+Every nav "Get the app" button now links to `/get/?ct=<page>-nav` (was a direct App Store link with `ct=nav-tryfree`). `/get/` sends iPhone visitors to the App Store with `ct=<page>-nav` and Android visitors to Google Play with `utm_source=icuk-web&utm_medium=<page>&utm_campaign=nav` (also inside `referrer=`). Desktop visitors see both buttons with the same tags. Page codes are the same as the store buttons above, plus `home`, `blog` (blog index), `privacy` and `terms`.

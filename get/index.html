@@ -34,14 +34,27 @@
   };
   var campaign = MAP[src] || (src ? src.slice(0, 30) : "direct");
 
+  // On-site links pass their own tag as ?ct=<page>-<placement> (e.g. b6-nav).
+  // It wins over utm_source and is sent unchanged to both stores, in the same
+  // format as the direct store buttons: App Store ct=<page>-<placement>;
+  // Google Play utm_source=icuk-web, utm_medium=<page>, utm_campaign=<placement>.
+  var ct = (params.get("ct") || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
+  var cut = ct.lastIndexOf("-");
+  if (ct) {
+    campaign = ct;
+    src = "icuk-web";
+    med = cut > 0 ? ct.slice(0, cut) : ct;
+  }
+  var playCampaign = (ct && cut > 0) ? ct.slice(cut + 1) : campaign;
+
   var iosUrl = "https://apps.apple.com/app/id6754808754?pt=" + encodeURIComponent(PT)
              + "&ct=" + encodeURIComponent(campaign) + "&mt=8";
 
   var ref = "utm_source=" + (src || "direct")
           + "&utm_medium=" + (med || "none")
-          + "&utm_campaign=" + campaign;
-  var androidUrl = "https://play.google.com/store/apps/details?id=com.interviewcoachuk&referrer="
-                 + encodeURIComponent(ref);
+          + "&utm_campaign=" + playCampaign;
+  var androidUrl = "https://play.google.com/store/apps/details?id=com.interviewcoachuk&" + ref
+                 + "&referrer=" + encodeURIComponent(ref);
 
   window.__icuk = { ios: iosUrl, android: androidUrl, campaign: campaign };
 
