@@ -6,13 +6,19 @@ Usage (Mac system Terminal, from website repo root):
   export ANTHROPIC_API_KEY=sk-ant-...   # set once per terminal session, never commit
   python3 tools/generate_post.py \
     --keyword "midwife interview questions" \
-    --slug midwife-interview-questions-uk
+    --slug midwife-interview-questions-uk \
+    --code midwife            # optional page code for tracking tags
+
+  Dry run (no API call, nothing written; prints the tracking tags):
+  python3 tools/generate_post.py --keyword "x" --slug x-interview-questions-uk --dry-run
 
 What it does:
   1. Loads blog/nhs-band-7-interview-questions/index.html as the master template
      (CSS, nav, CTA banners, sidebar, footer all reused verbatim).
   2. Calls the Anthropic API for article content as structured JSON.
-  3. Assembles blog/<slug>/index.html.
+  3. Assembles blog/<slug>/index.html, with every App Store ct= and Google Play
+     utm tag rewritten to this post's own page code (the template's b7 tags and
+     its per-question practice lines are not copied).
   4. Adds the URL to sitemap.xml (lastmod = today).
   5. Inserts a blog-card at the top of blog/index.html.
   6. Prints a review checklist + git commands. NOTHING is committed automatically.
@@ -25,6 +31,9 @@ SITEMAP = os.path.join(REPO, "sitemap.xml")
 BLOG_INDEX = os.path.join(REPO, "blog", "index.html")
 MODEL = "claude-sonnet-4-6"
 SITE = "https://interviewcoachuk.com"
+TEMPLATE_CODE = "b7"  # page code used in the template's ct= / utm_medium tags
+SLUG_SUFFIXES = ("-interview-questions-uk", "-interview-questions", "-interview-answers-uk",
+                 "-interview-answer-uk", "-interview-answer", "-interview-uk", "-uk")
 
 PROMPT = """You are the content writer for Interview Coach UK (interviewcoachuk.com), a UK interview-prep app. Write a definitive 2026 UK guide targeting the keyword: "{keyword}".
 
@@ -57,6 +66,47 @@ A: concise factual answer, 2-3 sentences, plain text.
 
 ===END===
 """
+
+def default_code(slug: str) -> str:
+    """Page code for tracking tags, e.g. midwife-interview-questions-uk -> midwife."""
+    for suf in SLUG_SUFFIXES:
+        if slug.endswith(suf) and len(slug) > len(suf):
+            return slug[: -len(suf)]
+    return slug
+
+def existing_codes(repo=REPO):
+    """Page codes already used by guides (from their ct=<code>-top tags)."""
+    codes = {}
+    blog = os.path.join(repo, "blog")
+    for d in sorted(os.listdir(blog)):
+        f = os.path.join(blog, d, "index.html")
+        if os.path.isfile(f):
+            with open(f, encoding="utf-8") as fh:
+                m = re.search(r"ct=([a-z0-9-]+)-top&", fh.read())
+            if m:
+                codes[m.group(1)] = d
+    return codes
+
+def tracking_tags(page: str):
+    """All (kind, value) tracking tags in a page, in document order."""
+    pat = r"[?&](ct)=([a-z0-9_-]+)|(utm_medium|utm_campaign)(?:=|%3D)([a-z0-9_-]+)"
+    return [(m.group(1) or m.group(3), m.group(2) or m.group(4)) for m in re.finditer(pat, page)]
+
+def retag(page: str, code: str, old: str = TEMPLATE_CODE) -> str:
+    """Rewrite the template's tracking tags to this page's code and drop the
+    template's per-question practice lines. Exits if any template tag survives."""
+    page = re.sub(r'[ \t]*<p class="icuk-q-cta">.*?</p>\n?', "", page, flags=re.S)
+    o = re.escape(old)
+    page = re.sub(rf"([?&]ct=){o}-", rf"\g<1>{code}-", page)
+    page = re.sub(rf"(utm_medium=){o}(?=&|\")", rf"\g<1>{code}", page)
+    page = re.sub(rf"(utm_medium%3D){o}(?=%26|&|\")", rf"\g<1>{code}", page)
+    problems = [f"{k}={v}" for k, v in tracking_tags(page)
+                if (k == "ct" and not v.startswith(code + "-"))
+                or (k == "utm_medium" and v != code)
+                or (k == "ct" and re.fullmatch(rf"{re.escape(code)}-q\d+", v))]
+    if "icuk-q-cta" in page.split("</style>")[-1] or problems:
+        sys.exit(f"ERROR: tags not rewritten to page code '{code}': {problems or 'icuk-q-cta line left'}")
+    return page
 
 def api_call(keyword: str) -> dict:
     key = os.environ.get("ANTHROPIC_API_KEY")
@@ -138,33 +188,27 @@ def build_article_jsonld(title, desc, url, today_iso):
     }
     return json.dumps(obj, indent=2, ensure_ascii=True)
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--keyword", required=True)
-    ap.add_argument("--slug", required=True)
-    ap.add_argument("--tag", default="Interview Tips")
-    a = ap.parse_args()
-    if not re.fullmatch(r"[a-z0-9-]+", a.slug):
-        sys.exit("ERROR: slug must be lowercase letters, digits, hyphens only")
-    out_dir = os.path.join(REPO, "blog", a.slug)
-    if os.path.exists(out_dir):
-        sys.exit(f"ERROR: {out_dir} already exists")
+SAMPLE_DATA = {
+    "title": "Sample Role Interview Questions UK (2026 Guide)",
+    "meta_description": "Sample meta description for a dry run.",
+    "quick_answer": "Sample quick answer.",
+    "excerpt": "Sample excerpt.",
+    "article_html": "<h2>What to expect</h2>\n<p>Sample body.</p>",
+    "faqs": [{"q": "Sample question %d?" % i, "a": "Sample answer."} for i in range(1, 4)],
+}
 
-    tpl = open(TEMPLATE, encoding="utf-8").read()
-    today = datetime.date.today()
+def build_page(tpl, keyword, slug, code, data, today):
+    """Assemble the new guide's HTML from the template and the model's content."""
     today_h = today.strftime("%-d %B %Y")
-    url = f"{SITE}/blog/{a.slug}/"
-
-    data = api_call(a.keyword)
+    url = f"{SITE}/blog/{slug}/"
     title, desc = data["title"], data["meta_description"]
-
     # --- head: swap metadata ---
     page = tpl
     def sub1(pattern, repl_fn, s, flags=0):
         return re.sub(pattern, repl_fn, s, count=1, flags=flags)
     page = sub1(r"<title>.*?</title>", lambda m: f"<title>{title} — Interview Coach UK</title>", page, re.S)
     page = sub1(r'(<meta name="description" content=").*?(">)', lambda m: m.group(1) + desc + m.group(2), page)
-    page = sub1(r'(<meta name="keywords" content=").*?(">)', lambda m: m.group(1) + a.keyword + m.group(2), page)
+    page = sub1(r'(<meta name="keywords" content=").*?(">)', lambda m: m.group(1) + keyword + m.group(2), page)
     for prop in ("og:title", "twitter:title"):
         page = sub1(rf'(property="{prop}" content="|name="{prop}" content=").*?(")', lambda m: m.group(1) + title + m.group(2), page)
     for prop in ("og:description", "twitter:description"):
@@ -188,31 +232,72 @@ def main():
     art = re.search(r"<article>(.*?)</article>", page, re.S)
     if not art:
         sys.exit("ERROR: <article> block not found in template")
-    def extract_balanced_div(s, start_pat):
-        m = re.search(start_pat, s)
-        if not m:
+    def extract_balanced_div(s, start_pat, last=False):
+        ms = list(re.finditer(start_pat, s))
+        if not ms:
             return ""
+        m = ms[-1] if last else ms[0]
         i, depth = m.start(), 0
         for t in re.finditer(r"<div\b|</div>", s[m.start():]):
             depth += 1 if t.group(0).startswith("<div") else -1
             if depth == 0:
                 return s[m.start(): m.start() + t.end()]
         return ""
-    cta_html = extract_balanced_div(art.group(1), r'<div class="icuk-cta-banner">')
-    if cta_html:
+    def personalise(banner):
         # personalise the banner line to this guide's keyword
-        cta_html = re.sub(r"<p>.*?</p>",
-                          lambda m: f"<p>Practise {a.keyword} in the Interview Coach UK app — free to download.</p>",
-                          cta_html, count=1, flags=re.S)
+        return re.sub(r"<p>.*?</p>",
+                      lambda m: f"<p>Practise {keyword} in the Interview Coach UK app — free to download.</p>",
+                      banner, count=1, flags=re.S)
+    cta_top = personalise(extract_balanced_div(art.group(1), r'<div class="icuk-cta-banner">'))
+    cta_end = personalise(extract_balanced_div(art.group(1), r'<div class="icuk-cta-banner">', last=True))
+    if cta_top == cta_end:
+        sys.exit("ERROR: template needs separate top and end CTA banners")
     new_article = "\n".join([
         f'<div class="quick-answer"><b>Quick answer:</b> {data["quick_answer"]}</div>',
-        cta_html,
+        cta_top,
         data["article_html"],
         build_faq_html(data["faqs"]),
         '<script type="application/ld+json">\n' + build_faq_jsonld(data["faqs"]) + "\n</script>",
-        cta_html,
+        cta_end,
     ])
     page = page.replace(art.group(0), "<article>\n" + new_article + "\n  </article>", 1)
+    return retag(page, code)
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--keyword", required=True)
+    ap.add_argument("--slug", required=True)
+    ap.add_argument("--tag", default="Interview Tips")
+    ap.add_argument("--code", help="page code for ct/utm tags (default: from slug)")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="no API call and nothing written; print the tracking tags")
+    a = ap.parse_args()
+    if not re.fullmatch(r"[a-z0-9-]+", a.slug):
+        sys.exit("ERROR: slug must be lowercase letters, digits, hyphens only")
+    code = a.code or default_code(a.slug)
+    if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", code) or len(code) > 30:
+        sys.exit("ERROR: code must be lowercase letters, digits and single hyphens, max 30 chars")
+    taken = existing_codes()
+    if code in taken and taken[code] != a.slug:
+        sys.exit(f"ERROR: page code '{code}' is already used by blog/{taken[code]}/ - pass --code")
+    out_dir = os.path.join(REPO, "blog", a.slug)
+    if os.path.exists(out_dir) and not a.dry_run:
+        sys.exit(f"ERROR: {out_dir} already exists")
+
+    tpl = open(TEMPLATE, encoding="utf-8").read()
+    today = datetime.date.today()
+    today_h = today.strftime("%-d %B %Y")
+    url = f"{SITE}/blog/{a.slug}/"
+
+    data = SAMPLE_DATA if a.dry_run else api_call(a.keyword)
+    title = data["title"]
+    page = build_page(tpl, a.keyword, a.slug, code, data, today)
+
+    if a.dry_run:
+        print(f"DRY RUN blog/{a.slug}/  page code: {code}  (nothing written)")
+        for href in re.findall(r'href="([^"]*(?:[?&]ct=|utm_)[^"]*)"', page):
+            print("  " + href.replace("&amp;", "&"))
+        return
 
     os.makedirs(out_dir)
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
