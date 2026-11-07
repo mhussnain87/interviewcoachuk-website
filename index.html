@@ -95,7 +95,7 @@ h2{font-size:2rem;font-weight:800;margin-bottom:14px;color:var(--navy)}
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
 .price-card{background:var(--bg);border:1.5px solid var(--line);border-radius:18px;padding:30px;display:flex;flex-direction:column}
 .price-card.featured{border-color:var(--teal);position:relative;background:var(--card);box-shadow:0 12px 32px rgba(23,162,184,.12)}
-.badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal-deep);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:5px 14px;border-radius:20px}
+.badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal-deep);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:5px 14px;border-radius:20px;white-space:nowrap}
 .price-card h3{font-size:1rem;font-weight:700;color:var(--navy)}
 .price{font-size:2.2rem;font-weight:800;color:var(--navy);margin:10px 0 2px}
 .price small{font-size:.9rem;color:var(--muted);font-weight:500}
@@ -129,7 +129,7 @@ footer a{color:#8FA1B3;text-decoration:none;margin-left:18px}
 footer a:hover{color:#fff}
 /* MOBILE */
 @media(max-width:900px){
-.hero-grid,.flagship-grid{grid-template-columns:1fr;gap:36px}
+.hero-grid,.flagship-grid,.flagship-grid.rev{grid-template-columns:1fr;gap:36px}
 .hero h1{font-size:2.1rem}
 .features-grid,.pricing-grid{grid-template-columns:1fr}
 .nav-links a:not(.nav-cta){display:none}
