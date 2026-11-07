@@ -37,6 +37,20 @@ class NewPostTags(unittest.TestCase):
         self.assertNotIn("icuk-q-cta", body)
         self.assertIsNone(re.search(r"ct=b7-|utm_medium(=|%3D)b7\b", self.page))
 
+    def test_breadcrumb_is_this_post(self):
+        import json
+        blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', self.page, re.S)
+        crumbs = [json.loads(b) for b in blocks if '"BreadcrumbList"' in b]
+        self.assertEqual(len(crumbs), 1)
+        last = crumbs[0]["itemListElement"][-1]
+        self.assertEqual(last["name"], gp.SAMPLE_DATA["title"])
+        self.assertEqual(last["item"], "https://interviewcoachuk.com/blog/pharmacist-interview-questions-uk/")
+
+    def test_head_has_no_band7_references(self):
+        head = self.page.split("</head>")[0]
+        self.assertNotIn("nhs-band-7", head)
+        self.assertNotIn("Band 7", head)
+
     def test_default_code_from_slug(self):
         self.assertEqual(gp.default_code("pharmacist-interview-questions-uk"), "pharmacist")
         self.assertEqual(gp.default_code("why-do-you-want-to-work-here-interview-answer"),

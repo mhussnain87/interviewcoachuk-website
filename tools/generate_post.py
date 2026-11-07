@@ -18,7 +18,8 @@ What it does:
   2. Calls the Anthropic API for article content as structured JSON.
   3. Assembles blog/<slug>/index.html, with every App Store ct= and Google Play
      utm tag rewritten to this post's own page code (the template's b7 tags and
-     its per-question practice lines are not copied).
+     its per-question practice lines are not copied), and the Article and
+     BreadcrumbList structured data rebuilt for this post.
   4. Adds the URL to sitemap.xml (lastmod = today).
   5. Inserts a blog-card at the top of blog/index.html.
   6. Prints a review checklist + git commands. NOTHING is committed automatically.
@@ -188,6 +189,17 @@ def build_article_jsonld(title, desc, url, today_iso):
     }
     return json.dumps(obj, indent=2, ensure_ascii=True)
 
+def build_breadcrumb_jsonld(title, url):
+    obj = {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE}/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": f"{SITE}/blog/"},
+            {"@type": "ListItem", "position": 3, "name": title, "item": url},
+        ],
+    }
+    return json.dumps(obj, indent=2, ensure_ascii=True)
+
 SAMPLE_DATA = {
     "title": "Sample Role Interview Questions UK (2026 Guide)",
     "meta_description": "Sample meta description for a dry run.",
@@ -220,6 +232,13 @@ def build_page(tpl, keyword, slug, code, data, today):
     article_ld = ('<script type="application/ld+json">\n'
                   + build_article_jsonld(title, desc, url, today.isoformat()) + "\n</script>")
     page = sub1(r'<script type="application/ld\+json">.*?</script>', lambda m: article_ld, page, re.S)
+    # replace the template's (Band 7) BreadcrumbList with this post's own
+    crumb_ld = ('<script type="application/ld+json">\n'
+                + build_breadcrumb_jsonld(title, url) + "\n</script>")
+    page, n = re.subn(r'<script type="application/ld\+json">(?:(?!</script>).)*?"BreadcrumbList".*?</script>',
+                      lambda m: crumb_ld, page, count=1, flags=re.S)
+    if n != 1:
+        sys.exit("ERROR: BreadcrumbList JSON-LD block not found in template")
 
     # --- hero bar ---
     hero = re.search(r'<div class="hero-bar">.*?</div>\s*(?=<div|<main|<section)', page, re.S)
