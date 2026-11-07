@@ -26,13 +26,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"MobileApplication","name":"Interview Coach UK","operatingSystem":"iOS, Android","applicationCategory":"EducationApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"UK interview preparation app with 315 competency questions, job-specific interview packs, and AI coaching."}
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Interview Coach UK","operatingSystem":"iOS, Android","applicationCategory":"EducationApplication","offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"GBP","description":"2 questions in every sector, a free AI review and re-score, a free coach message and a free interview pack preview."},{"@type":"Offer","name":"Interview Pass","price":"9.99","priceCurrency":"GBP","description":"One payment for 30 days of full access. Does not renew."},{"@type":"Offer","name":"Weekly","price":"2.99","priceCurrency":"GBP","description":"Full access, renews weekly until cancelled."}],"description":"UK interview preparation app with 315 competency questions, job-specific interview packs, and AI coaching."}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Is there a free trial?","acceptedAnswer":{"@type":"Answer","text":"Yes — Premium comes with a 3-day free trial on monthly and annual plans. Cancel anytime before the trial ends and you won't be charged."}},
+{"@type":"Question","name":"Can I try the app before paying?","acceptedAnswer":{"@type":"Answer","text":"Yes. The free version includes 2 questions in every sector, a free AI review and re-score, a free coach message and a free interview pack preview, so you can see how it works before you pay anything."}},
 {"@type":"Question","name":"Can it prepare me for a specific job advert?","acceptedAnswer":{"@type":"Answer","text":"Yes — paste the full job description into the app and it generates a tailored interview pack: 12 likely questions, the competencies the panel will probe hardest, and preparation insights."}},
-{"@type":"Question","name":"Is the app free to download?","acceptedAnswer":{"@type":"Answer","text":"Yes — free on iOS and Android with 30 Universal competency questions, mock interview mode, and basic AI feedback. Premium unlocks all 315 questions across 9 sectors."}},
+{"@type":"Question","name":"Is the app free to download?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free to download on iOS and Android, with 2 questions in every sector, a free AI review and re-score, a free coach message and a free interview pack preview. To unlock everything, choose the Interview Pass (£9.99, one payment for 30 days, does not renew) or Weekly (£2.99 a week, renews until cancelled)."}},
+{"@type":"Question","name":"How do I cancel?","acceptedAnswer":{"@type":"Answer","text":"The Interview Pass is a single payment for 30 days. It does not renew, so there is nothing to cancel. Weekly renews every week until you cancel it in your App Store or Google Play subscription settings, and you keep access until the end of the week you have paid for."}},
 {"@type":"Question","name":"What is the STAR method?","acceptedAnswer":{"@type":"Answer","text":"STAR stands for Situation, Task, Action, Result — the most widely used framework for answering competency-based interview questions in the UK."}}
 ]}
 </script>
@@ -62,7 +63,7 @@ nav{background:var(--navy);position:sticky;top:0;z-index:50}
 .store-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .store-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);text-decoration:none;font-weight:600;font-size:.95rem;padding:13px 22px;border-radius:12px}
 .store-btn.alt{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
-.trial-note{color:#7FD8E5;font-size:.88rem;font-weight:500}
+.hero-note{color:#7FD8E5;font-size:.88rem;font-weight:500}
 .stats{display:flex;gap:36px;margin-top:38px}
 .stat b{display:block;font-size:1.7rem;font-weight:800;color:var(--teal)}
 .stat span{color:#8FA1B3;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
@@ -95,7 +96,11 @@ h2{font-size:2rem;font-weight:800;margin-bottom:14px;color:var(--navy)}
 .price-card h3{font-size:1rem;font-weight:700;color:var(--navy)}
 .price{font-size:2.2rem;font-weight:800;color:var(--navy);margin:10px 0 2px}
 .price small{font-size:.9rem;color:var(--muted);font-weight:500}
-.trial-line{color:var(--teal-deep);font-weight:700;font-size:.88rem;margin-bottom:14px;min-height:1.3em}
+.plan-line{color:var(--teal-deep);font-weight:700;font-size:.88rem;margin-bottom:14px;min-height:1.3em}
+.free-strip{background:var(--teal-soft);border-radius:14px;padding:16px 20px;margin-bottom:28px;font-size:.92rem;color:var(--text)}
+.free-strip b{color:var(--navy)}
+.pricing-phone{align-self:center}
+.pricing-phone .phone{width:250px}
 .price-card ul{list-style:none;margin:12px 0 22px;flex:1}
 .price-card li{padding-left:24px;position:relative;font-size:.9rem;color:var(--muted);margin-bottom:9px}
 .price-card li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:700}
@@ -187,7 +192,7 @@ section{padding:52px 0}
       </div>
 <div class="cta-qr"><img src="/assets/qr-get-app.svg" alt="QR code to download Interview Coach UK" loading="lazy"><span>On desktop? Point your phone camera here - it goes straight to the right store.</span></div>
 
-      <div class="trial-note">Free to download · Premium free for 3 days</div>
+      <div class="hero-note">Free to download · 2 free questions in every sector</div>
 <a href="/blog/how-to-prepare-for-an-interview-uk/" class="prep-guide-card">
   <span class="pgc-icon">📘</span>
   <span class="pgc-text"><strong>New to interviews?</strong><br>Read our complete UK preparation guide — research, STAR answers, practice and the day itself.</span>
@@ -196,7 +201,7 @@ section{padding:52px 0}
       <div class="stats">
         <div class="stat"><b>315+</b><span>Questions</span></div>
         <div class="stat"><b>9</b><span>UK sectors</span></div>
-        <div class="stat"><b>3 days</b><span>Free trial</span></div>
+        <div class="stat"><b>£9.99</b><span>30-day pass</span></div>
       </div>
     </div>
     <div class="phone"><img src="/assets/screenshots/learn.png" alt="Interview Coach UK app - Learn tab with UK competency questions"></div>
@@ -275,29 +280,23 @@ section{padding:52px 0}
   <div class="container">
     <div class="section-tag">Pricing</div>
     <h2>Simple, transparent pricing</h2>
-    <p class="lead">Start free. Upgrade when you're ready — with 3 days free on monthly and annual plans.</p>
+    <p class="lead">Start free. When your interview is close, unlock everything with a one-off pass or a weekly plan.</p>
+    <div class="free-strip"><b>Free:</b> 2 questions in every sector, a free AI review and re-score, a free coach message and a free interview pack preview.</div>
     <div class="pricing-grid">
+      <div class="price-card featured">
+        <span class="badge">BEST FOR ONE INTERVIEW</span>
+        <h3>Interview Pass</h3>
+        <div class="price">£9.99<small> one payment</small></div>
+        <div class="plan-line">30 days of full access · does not renew</div>
+        <ul><li>Every question and sample answer, every sector</li><li>Unlimited AI feedback &amp; coaching</li><li>Full mock interviews</li><li>A full interview pack for your job</li><li>Nothing to cancel</li></ul>
+        <a class="price-cta" href="https://apps.apple.com/gb/app/id6754808754?pt=128149894&ct=website_home&mt=8">Get the Interview Pass</a>
+      </div>
       <div class="price-card">
         <h3>Weekly</h3>
         <div class="price">£2.99<small>/week</small></div>
-        <div class="trial-line"></div>
-        <ul><li>All 315 questions, every sector</li><li>Unlimited AI feedback &amp; coaching</li><li>Job-specific interview packs</li><li>Perfect for interview week</li></ul>
+        <div class="plan-line">Renews weekly until cancelled</div>
+        <ul><li>Everything in the Interview Pass</li><li>Pay a week at a time</li><li>Cancel any time in your App Store or Google Play subscription settings</li></ul>
         <a class="price-cta" href="https://apps.apple.com/gb/app/id6754808754?pt=128149894&ct=website_home&mt=8">Get the app</a>
-      </div>
-      <div class="price-card featured">
-        <span class="badge">MOST POPULAR</span>
-        <h3>Monthly</h3>
-        <div class="price">£4.99<small>/month</small></div>
-        <div class="trial-line">3 days free, then £4.99/month</div>
-        <ul><li>Everything in Weekly</li><li>3-day free trial included</li><li>Cancel anytime — no charge if you cancel in the trial</li></ul>
-        <a class="price-cta" href="https://apps.apple.com/gb/app/id6754808754?pt=128149894&ct=website_home&mt=8">Start free trial</a>
-      </div>
-      <div class="price-card">
-        <h3>Annual</h3>
-        <div class="price">£39.99<small>/year</small></div>
-        <div class="trial-line">3 days free, then £39.99/year</div>
-        <ul><li>Everything in Monthly</li><li>Best value — save 33%</li><li>3-day free trial included</li></ul>
-        <a class="price-cta" href="https://apps.apple.com/gb/app/id6754808754?pt=128149894&ct=website_home&mt=8">Start free trial</a>
       </div>
     </div>
   </div>
@@ -307,12 +306,12 @@ section{padding:52px 0}
   <div class="container">
     <div class="section-tag">FAQ</div>
     <h2>Common questions</h2>
-    <details><summary>Is there a free trial?</summary><p>Yes — Premium comes with a 3-day free trial on monthly and annual plans. Cancel anytime before the trial ends and you won't be charged.</p></details>
+    <details><summary>Can I try the app before paying?</summary><p>Yes. The free version includes 2 questions in every sector, a free AI review and re-score, a free coach message and a free interview pack preview, so you can see how it works before you pay anything.</p></details>
     <details><summary>Can it prepare me for a specific job advert?</summary><p>Yes — paste the full job description into the app and it generates a tailored interview pack for that exact role: 12 likely questions, the competencies the panel will probe hardest (with evidence quoted from the advert), and tactical preparation insights.</p></details>
-    <details><summary>Is the app really free to download?</summary><p>Yes — Interview Coach UK is free to download on iOS and Android. You get 30 Universal competency questions, mock interview mode, and basic AI feedback at no cost. Premium unlocks all 315 questions across 9 sectors.</p></details>
+    <details><summary>Is the app really free to download?</summary><p>Yes. Interview Coach UK is free to download on iOS and Android, and the free version includes 2 questions in every sector, a free AI review and re-score, a free coach message and a free interview pack preview. To unlock everything, choose the Interview Pass (£9.99, one payment for 30 days, does not renew) or Weekly (£2.99 a week, renews until cancelled).</p></details>
     <details><summary>What is the STAR method?</summary><p>STAR stands for Situation, Task, Action, Result. It's the most widely used framework for answering competency-based interview questions in the UK. The app teaches you the method and gives you feedback on how well you're applying it.</p></details>
     <details><summary>Which sectors are covered?</summary><p>NHS, Civil Service, Technology, Finance, Education, Retail, Engineering, Marketing, and Universal (suitable for any role).</p></details>
-    <details><summary>Can I cancel my subscription anytime?</summary><p>Yes. Subscriptions are managed through the App Store or Google Play and can be cancelled anytime from your device settings. You keep access until the end of your billing period.</p></details>
+    <details><summary>How do I cancel?</summary><p>The Interview Pass is a single payment for 30 days. It does not renew, so there is nothing to cancel. Weekly renews every week until you cancel it in your App Store or Google Play subscription settings, and you keep access until the end of the week you have paid for.</p></details>
   </div>
 </section>
 
@@ -335,7 +334,7 @@ section{padding:52px 0}
 <section class="final">
   <div class="container">
     <h2>Ready to ace your interview?</h2>
-    <p>Download free today — try Premium free for 3 days.</p>
+    <p>Download free today and try 2 questions in every sector before you pay anything.</p>
     <div class="store-buttons" style="justify-content:center">
       <a class="store-btn" href="https://apps.apple.com/gb/app/id6754808754?pt=128149894&ct=website_home&mt=8"> Download on the App Store</a>
       <a class="store-btn alt" href="https://play.google.com/store/apps/details?id=com.interviewcoachuk&referrer=utm_source%3Dwebsite%26utm_medium%3Dsite%26utm_campaign%3Dwebsite_home">▶ Get it on Google Play</a>

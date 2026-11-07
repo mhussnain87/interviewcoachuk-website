@@ -17,7 +17,7 @@ SITE = "https://interviewcoachuk.com"
 APP_IOS = "https://apps.apple.com/app/id6754808754"
 APP_AND = "https://play.google.com/store/apps/details?id=com.interviewcoachuk"
 
-PROMPT = """You write social content for Interview Coach UK, a solo-built UK interview-prep app (315 expert STAR answers across 9 UK sectors, AI answer coaching, mock interviews, and a feature that turns any pasted job advert into 12 tailored questions; 3-day free Premium trial; iOS + Android).
+PROMPT = """You write social content for Interview Coach UK, a solo-built UK interview-prep app (315 expert STAR answers across 9 UK sectors, AI answer coaching, mock interviews, and a feature that turns any pasted job advert into 12 tailored questions; free to download with 2 questions in every sector; full access via a £9.99 one-off 30-day Interview Pass or £2.99 weekly; no free trial; iOS + Android).
 
 Source guide just published:
 TITLE: {title}
