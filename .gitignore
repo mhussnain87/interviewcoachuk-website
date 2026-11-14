@@ -6,3 +6,7 @@
 # Local backup files (not for commit)
 .backups/
 *.bak
+
+# Private notes and Python cache
+claude/LAUNCH_1_5_LINKS.md
+__pycache__/
